@@ -10,7 +10,7 @@ exports.create = (req, res) => {
         });
     }
 
-    const materia = new Materia({
+    const politico = new Politicos({
       titulo : req.body.titulo,
       descripcion : req.body.descripcion,
       contenido : req.body.contenido,
@@ -19,12 +19,12 @@ exports.create = (req, res) => {
     });
 
     // Save materia in the database
-    materia.save()
+    politico.save()
     .then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || " Error en crear las politicos."
+            message: err.message || " Error en crear los politicos."
         });
     });
 };
