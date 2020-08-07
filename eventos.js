@@ -22,6 +22,7 @@ const mongoose = require('mongoose');
 
 //require('./politicos/politicos.routes.js')(app);
 require("./eventos/eventos.routes.js")(app);
+require("./chains/chains.routes.js")(app);
 mongoose.Promise = global.Promise;
 
 mongoose.connect(config.url, {

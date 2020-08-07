@@ -1,6 +1,6 @@
-const Chains = require('./chains.model.js');
+const Eventos = require('./eventos.model.js');
 
-//Create new chain
+//Create new evento
 exports.create = (req, res) => {
     // Request validation
     if(!req.body) {
@@ -10,64 +10,72 @@ exports.create = (req, res) => {
         });
     }
 
-    const chain = new Chains({
+    const evento = new Eventos({
       course : req.body.course,
-      creator: req.body.creator,
-      chain : req.body.chain,
-      responses : req.body.responses,
-      date: new Date()
+      start : req.body.start,
+      end : req.body.end,
+      title : req.body.title,
+      color : req.body.color,
+      actions : req.body.actions,
+      allDay : req.body.allDay,
+      resizable : req.body.resizable,
+      draggable : req.body.draggable
     });
 
     // Save materia in the database
-    chain.save()
+    evento.save()
     .then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || " Error en crear los chains."
+            message: err.message || " Error en crear los eventos."
         });
     });
 };
 
-// Retrieve all chains from the database.
+// Retrieve all eventos from the database.
 exports.findByCourse = (req, res) => {
-    Chains.find({course:req.params.id})
-    .then(chains => {
-        res.send(chains);
+    Eventos.find({course:req.params.id})
+    .then(eventos => {
+        res.send(eventos);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Error en traer las chains."
+            message: err.message || "Error en traer las eventos."
         });
     });
 };
-// Retrieve all chains from the database by id.
+// Retrieve all eventos from the database by id.
 exports.findAll = (req, res) => {
-    Chains.find()
-    .then(chains => {
-        res.send(chains);
+    Eventos.find()
+    .then(eventos => {
+        res.send(eventos);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Error en traer las chains."
+            message: err.message || "Error en traer las eventos."
         });
     });
 };
 
-// Update a chain
+// Update a evento
 exports.update = (req, res) => {
     // Validate Request
     if(!req.body) {
         return res.status(400).send({
-            message: "chain content can not be empty"
+            message: "evento content can not be empty"
         });
     }
 
     // Find and update materia with the request body
-    Chains.findByIdAndUpdate(req.params.id, {
+    Eventos.findByIdAndUpdate(req.params.id, {
       course : req.body.course,
-      creator: req.body.creator,
-      chain : req.body.chain,
-      responses : req.body.responses,
-      date: new Date()
+      start : req.body.start,
+      end : req.body.end,
+      title : req.body.title,
+      color : req.body.color,
+      actions : req.body.actions,
+      allDay : req.body.allDay,
+      resizable : req.body.resizable,
+      draggable : req.body.draggable
 
     }, {new: true})
     .then(materia => {
@@ -89,24 +97,27 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a chain with the specified noteId in the request
+// Delete a evento with the specified noteId in the request
 exports.delete = (req, res) => {
-    Chains.findByIdAndRemove(req.params.id)
+    Eventos.findByIdAndRemove(req.params.id)
     .then(materia => {
         if(!materia) {
             return res.status(404).send({
-                message: "chain no encontrado id " + req.params.id
+                message: "evento no encontrado id " + req.params.id
             });
         }
-        res.send({message: "chain borrado correctamente!"});
+        res.send({message: "evento borrado correctamente!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
-                message: "chain no encontrado id " + req.params.id
+                message: "evento no encontrado id " + req.params.id
             });
         }
         return res.status(500).send({
-            message: "No se pudo borrar el chain id " + req.params.id
+            message: "No se pudo borrar el evento id " + req.params.id
         });
     });
 };
+
+
+

@@ -1,13 +1,13 @@
 module.exports = (app) => {
-    const chains = require('./chains.controller.js');
+    const eventos = require('./eventos.controller.js');
 
-    app.post('/chains/', chains.create);
+    app.post('/eventos/', eventos.create);
 
-    app.get('/chains/', chains.findAll);
+    app.get('/eventos/', eventos.findAll);
 
-    app.get("/chains/:id", chains.findByCourse);
+    app.get("/eventos/:id", eventos.findByCourse);
 
-    app.put('/chains/:id', chains.update);
+    app.put('/eventos/:id', eventos.update);
 
-    app.delete('/chains/:id', chains.delete);
+    app.delete('/eventos/:id', eventos.delete);
 }

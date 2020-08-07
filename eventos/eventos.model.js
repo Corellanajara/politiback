@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 
-const chainschema = mongoose.Schema({
+const eventoschema = mongoose.Schema({
   course : String,
-  creator: String,
-  chain : String,
-  responses : Number,
-  date: Date
+  start : Date,
+  end : Date,
+  title : String,
+  color : Array,
+  actions : Array,
+  allDay : Boolean,
+  resizable : Array,
+  draggable : Boolean
 }, {
     timestamps: true
 });
 
 
-module.exports = mongoose.model('chains', chainschema);
+module.exports = mongoose.model('eventos', eventoschema);
